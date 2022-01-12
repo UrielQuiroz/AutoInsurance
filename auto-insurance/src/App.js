@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Formulario from "./components/Formulario";
 import Resumen from "./components/Resumen";
+import Resultado from "./components/Resultado";
 import styled from "@emotion/styled";
 
 const Contenedor = styled.div`
@@ -25,7 +26,7 @@ function App() {
       }
   });
 
-  const { datos } = resumen;
+  const { cotizacion, datos } = resumen;
 
   return (
     <Contenedor>
@@ -38,7 +39,9 @@ function App() {
 
               <Resumen 
                     datos={datos} />
-                    
+
+              <Resultado 
+                    cotizacion={cotizacion} />
             </ContenedorFormulario>
     </Contenedor>
   );
