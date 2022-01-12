@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { obtenerDiferenciaYear } from '../helper';
 import styled from '@emotion/styled';
 
 const Campo = styled.div`
@@ -79,6 +80,16 @@ const Formulario = () => {
         }
 
         guardarError(false);
+
+        //Iniciamos con una base de 2000
+        let result = 2000;
+
+        //Obtener la diferencia de años 
+        const diferencia = obtenerDiferenciaYear(year);
+
+        //Por cada año tenemos que restar eñ 3%
+        result -= (( diferencia * 3 ) * result ) / 100;
+        console.log(result);
     }
     
     return (
@@ -107,6 +118,7 @@ const Formulario = () => {
                     value={year}
                     onChange={obtenerInformacion} >
                     <option value="">-- Seleccione --</option>
+                    <option value="2022">2022</option>
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
                     <option value="2019">2019</option>
