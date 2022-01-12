@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 const Campo = styled.div`
@@ -42,11 +42,31 @@ const Button = styled.button`
 `;
 
 const Formulario = () => {
+
+    const [ datos, guardarDatos ] = useState({
+        marca: '',
+        year: '',
+        plan: ''
+    })
+
+    //Extraer los valores del state
+    const { marca, year, plan } = datos;
+
+    //Leer los valores del formulario y colocarlos en el state
+    const obtenerInformacion = e => {
+        guardarDatos({
+            ...datos, [e.target.name] : e.target.value
+        })
+    }
+
     return (
         <form>
             <Campo>
                 <Label>Marca</Label>
-                <Select name="" id="">
+                <Select 
+                    name="marca"
+                    value={marca}
+                    onChange={obtenerInformacion} >
                     <option value="">-- Seleccione --</option>
                     <option value="americano">Americano</option>
                     <option value="europeo">Europeo</option>
@@ -56,7 +76,10 @@ const Formulario = () => {
 
             <Campo>
                 <Label>Año</Label>
-                <Select name="" id="">
+                <Select 
+                    name="year"
+                    value={year}
+                    onChange={obtenerInformacion} >
                     <option value="">-- Seleccione --</option>
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
@@ -76,12 +99,16 @@ const Formulario = () => {
                 <InputRadio 
                     type="radio"
                     name='plan'
-                    value='basico' /> Básico
+                    value='basico'
+                    checked={plan === 'basico'}
+                    onChange={obtenerInformacion} /> Básico
 
                 <InputRadio 
                     type="radio"
                     name='plan'
-                    value='completo' /> Completo
+                    value='completo'
+                    checked={plan === 'completo'}
+                    onChange={obtenerInformacion} /> Completo
             </Campo>
 
             <Button type='button'>Cotizar</Button>
