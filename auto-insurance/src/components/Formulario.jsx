@@ -51,7 +51,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `;
 
-const Formulario = () => {
+const Formulario = ({ guardarResumen }) => {
 
     const [ datos, guardarDatos ] = useState({
         marca: '',
@@ -100,7 +100,10 @@ const Formulario = () => {
         const incrementoPlan = obtenerPlan(plan);
         result = parseFloat( incrementoPlan * result ).toFixed(2);
         //Total
-        console.log(result);
+        guardarResumen({
+            cotizacion: result, 
+            datos
+        })
     }
     
     return (
